@@ -23,6 +23,7 @@
                                         "perempuan"?'selected':''}}>
                                         Perempuan</option>
                                 </select>
+                            </div>
                                 <div class="mb-2">
                                 <label for="">Kelas</label>
                                 <input type="text" class="form-control" name="kelas" value="{{$nilai->kelas}}" required>

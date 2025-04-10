@@ -18,6 +18,7 @@
                                     <option value="laki-laki">Laki-laki</option>
                                     <option value="perempuan">Perempuan</option>
                                 </select>
+                            </div>
                                 <div class="mb-2">
                                 <label for="">Kelas</label>
                                 <input type="text" class="form-control" name="kelas" required>

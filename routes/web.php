@@ -6,6 +6,20 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\Nilaicontroller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\TeleponController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukkController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PembeliController;
+use App\Http\Controllers\TransaksiController;
+
+
+
+
+
+
+
 
 
 
@@ -31,7 +45,7 @@ Route::get('about', function () {
     return "<h2>Ini Halaman About</h2>";
 });
 
-Route::get('/contact', function () {
+Route::get('/contact', function (){
     return "<h2>Ini Halaman Contanct</h2>";
 });                   
 
@@ -107,6 +121,22 @@ Route::resource('produk', ProdukController::class);
 Route::resource('pendaftaran', PendaftaranController::class);
 
 Route::resource('product', ProductController::class);
+// one to one
+Route::resource('pengguna', PenggunaController::class);
+Route::resource('telepon', TeleponController::class);
+//one to many
+Route::resource('kategori', KategoriController::class);
+Route::resource('produkk', ProdukkController::class);
+//many to many
+Route::resource('obat', ObatController::class);
+Route::resource('pembeli', PembeliController::class);
+Route::resource('transaksi', TransaksiController::class);
+
+
+
+
+
+
 
 
 

@@ -20,14 +20,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // membuat validasi
-        $validated = $request->validate([
-            'name'            => 'required',
-            'price'           => 'required|numeric',
-            'photo'           => 'required|mimes:png,jpg|max:1024',
-            'stock'           => 'required|numeric',
-            'production_date' => 'required',
-            'merk'            => 'required',
-        ]);
+        // $validated = $request->validate([
+        //     'name'            => 'required',
+        //     'price'           => 'required|numeric',
+        //     'photo'           => 'required|mimes:png,jpg|max:1024',
+        //     'stock'           => 'required|numeric',
+        //     'production_date' => 'required',
+        //     'merk'            => 'required',
+        // ]);
 
         $product                  = new Product();
         $product->name            = $request->name;
@@ -37,12 +37,15 @@ class ProductController extends Controller
         $product->stock           = $request->stock;
 
         // upload gambar atau foto
-        $image = $request->file('photo');
-        $image->storeAs('public/product', $image->hashName());
-        $product->photo = $image->hashName();
-
+   if ($request->hasFile('photo')) {
+            $img = $request->file('photo');
+            $name = rand(1000,9999).$img->getClientOriginalName();
+            $img->move('storage/product', $name);
+            $product->photo = $name;
+        }
+       
         $product->save();
-
+ 
         return redirect()->route('product.index')->with('success', 'Data successfully saved');
     }
 
@@ -56,49 +59,46 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         return view('product.edit', compact('product'));
-    }
+    }                                                 
 
-    public function update(Request $request, $id)
+    public   function update(Request $request, $id)
     {
-        // membuat validasi
-        $validated = $request->validate([
-            'name'            => 'required',
-            'price'           => 'required|numeric',
-            'photo'           => 'nullable|mimes:png,jpg|max:1024',
-            'stock'           => 'required|numeric',
-            'production_date' => 'required',
-            'merk'            => 'required',
-        ]);
+        // // membuat validasi
+        // $validated = $request->validate([
+        //     'name'            => 'required',
+        //     'price'           => 'required|numeric',
+        //     'photo'           => 'nullable|mimes:png,jpg|max:1024',
+          //     'stock'           => 'required|numeric',
+          //     'production_date' => 'required',
+        //     'merk'            => 'required',
+         // ]);
 
-        $product                  = Product::findOrFail($id);
+         $product                  = Product::findOrFail($id);
         $product->name            = $request->name;
         $product->merk            = $request->merk;
         $product->production_date = $request->production_date;
         $product->price           = $request->price;
-        $product->stock           = $request->stock;
+         $product->stock           = $request->stock;
 
         // update gambar atau foto
         if ($request->hasFile('photo')) {
-            // Hapus gambar yang lama jika ada
-            if ($product->photo && \Storage::exists('public/product/' . $product->photo)) {
-                Storage::delete('public/product/' . $product->photo);
-            }
-
-            // upload gambar atau foto baru
-            $image = $request->file('photo');
-            $image->storeAs('public/product', $image->hashName());
-            $product->photo = $image->hashName();
+            $product->deleteImage(); //tambahan
+            $img = $request->file('photo');
+            $name = rand(1000,9999).$img->getClientOriginalName();
+            $img->move('storage/product', $name);
+            $product->photo = $name;
         }
+            
 
         $product->save();
-
-        return redirect()->route('product.index')->with('success', 'Data successfully edited');
+ 
+          return redirect()->route('product.index')->with('success', 'Data successfully edited');
     }
 
-    public function destroy($id)
+     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-
+ 
         // hapus foto di storage
         if ($product->photo && \Storage::exists('public/product/' . $product->photo)) {
             Storage::delete('public/product/' . $product->photo);
@@ -109,3 +109,4 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('success', 'Data successfully deleted');
     }
 }
+ 

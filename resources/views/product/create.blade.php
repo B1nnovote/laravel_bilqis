@@ -31,10 +31,10 @@
                         <input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock">
                         @error('stock')
                         <div class="invalid-feedback">{{$messege}}</div>
-                        @enderror
-                </div>
+                       @enderror
+                </div> 
                  <div class="card-body">
-                      <div class="mb-3">
+                           <div class="mb-3"> 
                         <label for="">Harga</label>
                         <input type="text" class="form-control @error('price') is-invalid @enderror" name="price">
                         @error('price')
@@ -48,7 +48,7 @@
                         <div class="invalid-feedback">{{$messege}}</div>
                         @enderror
                 </div>
-                <div class="mb-3">
+                <div class="mb-3">                                      
                         <label for="">Foto</label>
                         <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
                         @error('photo')

@@ -30,13 +30,13 @@
                         <tr>
                             <th>Tanggal Produksi</th>
                             <td>{{ date('d M Y', strtotime($product->production_date)) }}</td>
-                        </tr>
-                        <tr>
+                        </tr>                                                                                                                                                             
+                        <tr>                                                                              
                             <th>Foto</th>
                             <td>
                                 @if ($product->photo)
-                                    <img src="{{ Storage::url('product/' . $product->photo) }}" alt="Foto Produk" class="img-thumbnail" width="150">
-                                @else
+                                    <img src="{{ Storage::url( 'product/' . $product->photo) }}" alt="Foto Produk" class="img-thumbnail" width="150">
+                                                                                 @else
                                     <p>Tidak ada foto</p>
                                 @endif
                             </td>

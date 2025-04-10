@@ -1,0 +1,23 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Data Kategori</h3>
+                </div>
+
+                <div class="card-body">
+                   <div class="mb-2">
+                                <label class="mb-3" for=""><b>Nama Kategori</b></label>
+                                <input type="text" class="form-control" name="nama_kategori" value="{{$kategori->nama_kategori}}" disabled>
+                            </div>
+                    <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
